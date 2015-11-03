@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.FractionalKnapsackProblem", "01.FractionalKnapsackProblem\01.FractionalKnapsackProblem.csproj", "{90FA1020-C9CB-464E-B006-BE2320CE1A06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.ProcessorScheduling", "02.ProcessorScheduling\02.ProcessorScheduling.csproj", "{1C02373E-5C24-40F1-BB00-4F5D4BB81127}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{90FA1020-C9CB-464E-B006-BE2320CE1A06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90FA1020-C9CB-464E-B006-BE2320CE1A06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90FA1020-C9CB-464E-B006-BE2320CE1A06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C02373E-5C24-40F1-BB00-4F5D4BB81127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C02373E-5C24-40F1-BB00-4F5D4BB81127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C02373E-5C24-40F1-BB00-4F5D4BB81127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C02373E-5C24-40F1-BB00-4F5D4BB81127}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
