@@ -25,7 +25,7 @@
                 .OrderByDescending(task => task.Value);
 
             int turns = 1;
-            foreach (var task in tasks)
+            foreach (var task in sorted)
             {
                 if (task.Deadtime >= turns)
                 {
