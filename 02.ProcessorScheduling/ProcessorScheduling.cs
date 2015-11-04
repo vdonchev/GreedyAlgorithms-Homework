@@ -11,7 +11,9 @@
         static void Main(string[] args)
         {
             GetInputData();
-            var sorted = tasks.OrderByDescending(task => task.Value);
+            var sorted = tasks
+                .OrderByDescending(task => task.Value);
+
             var taskList = new List<Task>();
             foreach (var task in sorted)
             {
@@ -26,16 +28,18 @@
 
         private static void GetInputData()
         {
-            int count = int.Parse(Console.ReadLine().Split(' ')[1]);
+            int count = int.Parse(Console.ReadLine()
+                .Split(' ')[1]);
+
             tasks = new Task[count];
             for (int i = 1; i <= count; i++)
             {
                 int[] tokens = Console.ReadLine()
-                    .Split(new[] {' ', '-'}, StringSplitOptions.RemoveEmptyEntries)
+                    .Split(new[] { ' ', '-' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(int.Parse)
                     .ToArray();
 
-                tasks[i - 1] = new Task {Index = i, Value = tokens[0], Deadline = tokens[1]};
+                tasks[i - 1] = new Task { Index = i, Value = tokens[0], Deadline = tokens[1] };
             }
         }
 
@@ -52,10 +56,12 @@
         }
 
         static bool ValidateTask(List<Task> tasks, Task task)
-       {
-            var tempTasks = new List<Task> {task};
+        {
+            var tempTasks = new List<Task> { task };
             tempTasks.AddRange(tasks);
-            var tempTaskList = tempTasks.OrderBy(t => t.Deadline);
+            var tempTaskList = tempTasks
+                .OrderBy(t => t.Deadline);
+
             int step = 1;
             foreach (var t in tempTaskList)
             {
