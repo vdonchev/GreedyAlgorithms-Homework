@@ -1,38 +1,76 @@
 ﻿namespace _02.ProcessorScheduling
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     class ProcessorScheduling
     {
+        private static Task[] tasks;
+
         static void Main(string[] args)
         {
-            var tasks = new[]
-            {
-                new {Index = 1, Value = 5, Deadtime = 3},
-                new {Index = 2, Value = 6, Deadtime = 4},
-                new {Index = 3, Value = 2, Deadtime = 1},
-                new {Index = 4, Value = 3, Deadtime = 4},
-                new {Index = 5, Value = 8, Deadtime = 2},
-                new {Index = 6, Value = 4, Deadtime = 3},
-            };
-
-            //var sortedTasks = tasks
-            //    .OrderBy(task => task.Deadtime)
-            //    .ThenByDescending(task => task.Value);
-
-            var sorted = tasks
-                .OrderByDescending(task => task.Value);
-
-            int turns = 1;
+            GetInputData();
+            var sorted = tasks.OrderByDescending(task => task.Value);
+            var taskList = new List<Task>();
             foreach (var task in sorted)
             {
-                if (task.Deadtime >= turns)
+                if (ValidateTask(taskList, task))
                 {
-                    Console.Write(task.Index + " ");
-                    turns++;
+                    taskList.Add(task);
                 }
             }
-        } 
+
+            Print(taskList);
+        }
+
+        private static void GetInputData()
+        {
+            int count = int.Parse(Console.ReadLine().Split(' ')[1]);
+            tasks = new Task[count];
+            for (int i = 1; i <= count; i++)
+            {
+                int[] tokens = Console.ReadLine()
+                    .Split(new[] {' ', '-'}, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(int.Parse)
+                    .ToArray();
+
+                tasks[i - 1] = new Task {Index = i, Value = tokens[0], Deadline = tokens[1]};
+            }
+        }
+
+        private static void Print(List<Task> taskList)
+        {
+            Console.WriteLine("Optimal schedule: " + string.Join(
+                " -> ",
+                taskList
+                    .OrderBy(task => task.Deadline)
+                    .ThenByDescending(task => task.Value)
+                    .Select(s => s.Index)
+                ));
+            Console.WriteLine($"Total value: {taskList.Sum(task => task.Value)}");
+        }
+
+        static bool ValidateTask(List<Task> tasks, Task task)
+       {
+            var tempTasks = new List<Task> {task};
+            tempTasks.AddRange(tasks);
+            var tempTaskList = tempTasks.OrderBy(t => t.Deadline);
+            int step = 1;
+            foreach (var t in tempTaskList)
+            {
+                if (step > t.Deadline) return false;
+                step++;
+            }
+
+            return true;
+        }
+    }
+
+    class Task
+    {
+        public int Index { get; set; }
+        public int Value { get; set; }
+        public int Deadline { get; set; }
     }
 }
