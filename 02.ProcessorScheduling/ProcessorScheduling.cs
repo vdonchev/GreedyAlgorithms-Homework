@@ -30,14 +30,24 @@
             tasks = new Task[count];
             for (int i = 1; i <= count; i++)
             {
-                int[] tokens = Console.ReadLine().Split(new[] {' ', '-'}, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+                int[] tokens = Console.ReadLine()
+                    .Split(new[] {' ', '-'}, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(int.Parse)
+                    .ToArray();
+
                 tasks[i - 1] = new Task {Index = i, Value = tokens[0], Deadline = tokens[1]};
             }
         }
 
         private static void Print(List<Task> taskList)
         {
-            Console.WriteLine("Optimal schedule: " + string.Join(" -> ", taskList.OrderBy(task => task.Deadline).ThenByDescending(task => task.Value).Select(s => s.Index)));
+            Console.WriteLine("Optimal schedule: " + string.Join(
+                " -> ",
+                taskList
+                    .OrderBy(task => task.Deadline)
+                    .ThenByDescending(task => task.Value)
+                    .Select(s => s.Index)
+                ));
             Console.WriteLine($"Total value: {taskList.Sum(task => task.Value)}");
         }
 
@@ -49,7 +59,11 @@
             int step = 1;
             foreach (var t in tempTaskList)
             {
-                if (step > t.Deadline) return false;
+                if (step > t.Deadline)
+                {
+                    return false;
+                }
+
                 step++;
             }
 
